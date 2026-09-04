@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.tbogard.horizon-input",
+  "name": "Horizon VDI Input Mode",
+  "version": "0.1.0",
+  "author": "Erick Rodriguez",
+  "license": "MIT",
+  "description": "Pass compositor shortcuts to Horizon while a remote desktop is open.",
+  "kinds": ["service"],
+  "keepLoaded": true,
+  "omarchy": {
+    "testedVersion": "4.0.1-1"
+  },
+  "entryPoints": {
+    "service": "Service.qml"
+  }
+}
