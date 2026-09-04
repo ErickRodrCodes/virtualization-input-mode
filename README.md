@@ -1,19 +1,16 @@
 # Horizon VDI Input Mode
 
-An Omarchy service plugin that temporarily disables compositor keybindings
-while an Omnissa Horizon remote desktop is open. This lets shortcuts such as
-`Alt+Tab` and `Super` combinations reach the Windows VDI.
+An Omarchy bar plugin with a manual input-mode toggle for Omnissa Horizon.
+When enabled, shortcuts such as `Alt+Tab` and `Super` combinations reach the
+Windows VDI instead of being handled by Omarchy.
 
-The Horizon launcher window does not activate the mode. Opening a remote
-desktop activates the `horizon-vdi` Hyprland submap; closing the final remote
-desktop restores Omarchy's default bindings.
+Click the Horizon logo in the bar and turn on **Horizon Input Mode** before
+working in a remote desktop. Turn it off to restore Omarchy shortcuts. The
+toggle works independently of Horizon and does not inspect open windows.
 
 Use `Super+Ctrl+Escape` as an emergency local unlock. After an emergency
-unlock, input mode stays unlocked for that VDI session and activates again the
-next time a VDI is opened.
-
-The repository retains the official Horizon Client SVG as an asset for a
-future UI, but this known-good baseline exposes no panel or widget.
+unlock. The toggle always reads the active Hyprland submap, so its displayed
+state reflects the compositor rather than a cached request.
 
 ## Install
 
@@ -24,7 +21,7 @@ Place this directory at:
 Then enable it:
 
 ```sh
-omarchy plugin enable io.github.tbogard.horizon-input
+omarchy plugin enable io.github.tbogard.horizon-input --section right
 ```
 
 ## Uninstall

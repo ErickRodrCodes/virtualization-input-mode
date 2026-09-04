@@ -2,16 +2,25 @@
   "schemaVersion": 1,
   "id": "io.github.tbogard.horizon-input",
   "name": "Horizon VDI Input Mode",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Erick Rodriguez",
   "license": "MIT",
-  "description": "Pass compositor shortcuts to Horizon while a remote desktop is open.",
-  "kinds": ["service"],
+  "description": "Manually pass Alt+Tab and Super shortcuts through to an Omnissa Horizon desktop.",
+  "kinds": ["service", "bar-widget"],
   "keepLoaded": true,
   "omarchy": {
     "testedVersion": "4.0.1-1"
   },
   "entryPoints": {
-    "service": "Service.qml"
+    "service": "Service.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Horizon Input Mode",
+    "description": "Toggle whether Omarchy or Horizon receives desktop shortcuts.",
+    "category": "System",
+    "aliases": ["horizon", "omnissa", "vdi", "input", "keybinds"],
+    "allowMultiple": false,
+    "defaultSection": "right"
   }
 }
