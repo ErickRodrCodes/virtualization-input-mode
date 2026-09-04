@@ -8,16 +8,23 @@ Item {
   property var manifest: null
   readonly property string pluginDir: manifest && manifest.__sourceDir
     ? manifest.__sourceDir
-    : Quickshell.env("HOME") + "/.config/omarchy/plugins/io.github.tbogard.horizon-input"
+    : Quickshell.env("HOME") + "/.config/omarchy/plugins/io.github.tbogard.virtualization-input-mode"
   property bool ready: false
   property bool active: false
   property bool busy: false
   property string diagnosticLog: "Loading diagnostic log…"
+  readonly property bool vdiActive: vdiDetector.active
+  readonly property int vdiCount: vdiDetector.count
+  readonly property var vdiNames: vdiDetector.names
   property string message: ready ? (active
-    ? "Omarchy shortcuts are paused. Horizon receives Alt+Tab and Super shortcuts."
-    : "Omarchy shortcuts are active.") : "Preparing Horizon input mode…"
+    ? "Omarchy shortcuts are paused. Guest applications receive Alt+Tab and Super shortcuts."
+    : "Omarchy shortcuts are active.") : "Preparing virtualization input mode…"
 
-  readonly property string submapName: "horizon-vdi"
+  readonly property string submapName: "virtualization-input"
+
+  VdiDetector {
+    id: vdiDetector
+  }
   function setActive(enabled) {
     if (!ready || busy) return
     busy = true
@@ -50,7 +57,7 @@ Item {
     onExited: function(exitCode) {
       root.ready = exitCode === 0
       if (root.ready) root.refresh()
-      else root.message = "Could not register the Horizon input mode."
+      else root.message = "Could not register virtualization input mode."
     }
   }
 
@@ -100,7 +107,4 @@ Item {
   }
 
   Component.onCompleted: setupCommand.running = true
-  Component.onDestruction: {
-    if (active) Quickshell.execDetached(["hyprctl", "dispatch", "hl.dsp.submap(\"reset\")"])
-  }
 }

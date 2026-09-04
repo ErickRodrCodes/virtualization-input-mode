@@ -4,7 +4,7 @@ import qs.Ui as Ui
 
 Ui.BarWidget {
   id: root
-  moduleName: "io.github.tbogard.horizon-input"
+  moduleName: "io.github.tbogard.virtualization-input-mode"
   property var inputService: null
   readonly property bool active: inputService ? inputService.active : false
   readonly property bool opened: panelLoader.item ? panelLoader.item.opened === true : false
@@ -51,13 +51,14 @@ Ui.BarWidget {
     anchors.fill: parent
     bar: root.bar
     iconComponent: Component {
-      HorizonIcon {
+      VirtualizationIcon {
         anchors.centerIn: parent
         iconSize: 20
+        color: root.bar ? root.bar.foreground : "white"
         iconOpacity: root.active ? 1.0 : 0.55
       }
     }
-    tooltipText: root.active ? "Horizon input mode: on" : "Horizon input mode: off"
+    tooltipText: root.active ? "Virtualization input mode: on" : "Virtualization input mode: off"
     onPressed: function(buttonCode) { if (buttonCode === Qt.LeftButton) root.toggle() }
   }
 }

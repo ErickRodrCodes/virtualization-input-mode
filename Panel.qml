@@ -4,7 +4,7 @@ import qs.Ui
 
 Panel {
   id: root
-  moduleName: "io.github.tbogard.horizon-input"
+  moduleName: "io.github.tbogard.virtualization-input-mode"
   manageIpc: false
   property var anchorItem: null
   property var hostWidget: null
@@ -35,7 +35,7 @@ Panel {
       onCloseRequested: view.goBack()
       onTabRequested: function(direction) { root.switchPanel(direction) }
       onTextKey: function(t) { view.handleTextKey(t) }
-      HorizonView {
+      VirtualizationView {
         id: view
         width: parent.width
         controller: root.inputService

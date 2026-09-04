@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "id": "io.github.tbogard.horizon-input",
-  "name": "Horizon VDI Input Mode",
+  "id": "io.github.tbogard.virtualization-input-mode",
+  "name": "Virtualization Input Mode",
   "version": "0.2.0",
   "author": "Erick Rodriguez",
   "license": "MIT",
-  "description": "Manually pass Alt+Tab and Super shortcuts through to an Omnissa Horizon desktop.",
+  "description": "Pass Omarchy desktop shortcuts through to virtual machines, VDIs, and remote desktop clients.",
   "kinds": ["service", "bar-widget"],
   "keepLoaded": true,
   "omarchy": {
@@ -16,10 +16,10 @@
     "barWidget": "BarWidget.qml"
   },
   "barWidget": {
-    "displayName": "Horizon Input Mode",
-    "description": "Toggle whether Omarchy or Horizon receives desktop shortcuts.",
+    "displayName": "Virtualization Input Mode",
+    "description": "Toggle whether Omarchy or a guest application receives desktop shortcuts.",
     "category": "System",
-    "aliases": ["horizon", "omnissa", "vdi", "input", "keybinds"],
+    "aliases": ["virtualization", "vm", "remote-desktop", "horizon", "omnissa", "vdi", "input", "keybinds"],
     "allowMultiple": false,
     "defaultSection": "right"
   }

@@ -41,12 +41,16 @@ Item {
 
     PanelHero {
       width: parent.width
-      title: "Horizon Input Mode"
-      meta: root.active ? "Passing shortcuts to Horizon" : "Omarchy shortcuts active"
+      title: "Virtualization Input Mode"
+      meta: root.active ? "Passing shortcuts to the guest" : "Omarchy shortcuts active"
       foreground: root.foreground
       iconOpacity: root.active ? 1.0 : 0.55
       iconComponent: Component {
-        HorizonIcon { iconSize: Style.font.display; iconOpacity: root.active ? 1.0 : 0.55 }
+        VirtualizationIcon {
+          iconSize: Style.font.display
+          color: root.foreground
+          iconOpacity: root.active ? 1.0 : 0.55
+        }
       }
       trailingControl: Component {
         ToggleSwitch {
@@ -71,9 +75,23 @@ Item {
     Text {
       width: parent.width
       text: root.active
-        ? "Alt+Tab and Super shortcuts now pass through to the remote desktop. Press Super+Ctrl+Escape at any time to restore Omarchy shortcuts."
-        : "Turn this on whenever you want applications to receive Alt+Tab and Super shortcuts instead of Omarchy. No Horizon or VDI window is required."
+        ? "Alt+Tab and Super shortcuts now pass through to the guest application. Press Super+Ctrl+Escape at any time to restore Omarchy shortcuts."
+        : "Turn this on for a VM, VDI, remote desktop, nested compositor, or other application that must receive shortcuts normally handled by Omarchy."
       color: root.dim
+      font.family: root.fontFamily
+      font.pixelSize: Style.font.bodySmall
+      wrapMode: Text.WordWrap
+    }
+
+    Text {
+      width: parent.width
+      text: {
+        if (!root.controller || !root.controller.vdiActive)
+          return "VDI status: No Horizon desktop detected"
+        return "VDI status: Active (" + root.controller.vdiCount + ")\n"
+          + root.controller.vdiNames.join("\n")
+      }
+      color: root.controller && root.controller.vdiActive ? root.foreground : root.dim
       font.family: root.fontFamily
       font.pixelSize: Style.font.bodySmall
       wrapMode: Text.WordWrap
@@ -134,7 +152,7 @@ Item {
       Text {
         id: backLabel
         anchors.verticalCenter: parent.verticalCenter
-        text: "‹  Horizon Input Mode"
+        text: "‹  Virtualization Input Mode"
         color: root.foreground
         font.family: root.fontFamily
         font.pixelSize: Style.font.body

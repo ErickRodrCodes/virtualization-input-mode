@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-submap_name="horizon-vdi"
-setup_expression='hl.define_submap("horizon-vdi", function() hl.bind("SUPER + CTRL + ESCAPE", hl.dsp.submap("reset"), { description = "Emergency restore Omarchy shortcuts" }) end)'
-state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/horizon-input-mode"
+submap_name="virtualization-input"
+setup_expression='hl.define_submap("virtualization-input", function() hl.bind("SUPER + CTRL + ESCAPE", hl.dsp.submap("reset"), { description = "Emergency restore Omarchy shortcuts" }) end)'
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/virtualization-input-mode"
 log_file="$state_dir/activity.log"
 
 log_event() {
@@ -28,14 +28,14 @@ case "${1:-}" in
   on)
     log_event "toggle requested: on"
     setup_mode
-    hyprctl dispatch 'hl.dsp.submap("horizon-vdi")' >/dev/null
+    hyprctl dispatch 'hl.dsp.submap("virtualization-input")' >/dev/null
     [[ "$(current_submap)" == "$submap_name" ]] || {
       log_event "toggle on: FAILED (submap=$(current_submap))"
-      echo "Hyprland did not enter Horizon input mode." >&2
+      echo "Hyprland did not enter virtualization input mode." >&2
       exit 1
     }
-    log_event "toggle on: verified submap=horizon-vdi"
-    echo "Horizon now receives Alt+Tab and Super shortcuts."
+    log_event "toggle on: verified submap=virtualization-input"
+    echo "Guest applications now receive Alt+Tab and Super shortcuts."
     ;;
   off)
     log_event "toggle requested: off"
